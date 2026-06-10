@@ -9,4 +9,4 @@ COPY . .
 
 ENV API_HOST=0.0.0.0
 
-CMD uvicorn main:app --host 0.0.0.0 --port ${PORT:-8500}
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8500}"]

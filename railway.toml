@@ -1,0 +1,12 @@
+# Used when Railway Root Directory is the repo root (.)
+# Prefer setting Root Directory to "backend" in Railway dashboard instead.
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "backend/Dockerfile"
+watchPatterns = ["backend/**"]
+
+[deploy]
+healthcheckPath = "/health"
+healthcheckTimeout = 30
+restartPolicyType = "ON_FAILURE"
