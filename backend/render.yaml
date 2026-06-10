@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: lawind-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: CORS_ORIGINS
+        value: https://lawind.ai,https://www.lawind.ai
+      - key: APP_ENV
+        value: production
