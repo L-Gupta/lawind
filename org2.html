@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ROI Calculator | LawInd</title><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"><style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--bg:#FAF8F4;--bg2:#F2EFE8;--ink:#0A0907;--ink2:#2C2A25;--ink60:rgba(10,9,7,.6);--ink30:rgba(10,9,7,.3);--ink10:rgba(10,9,7,.1);--ink05:rgba(10,9,7,.05);--gold2:#A07820;--gold3:#6B5210;--line:rgba(139,105,20,0.15);--linest:rgba(139,105,20,0.3)}html{scroll-behavior:smooth}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}a{text-decoration:none;color:inherit}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,248,244,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:0 4rem;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-weight:400;color:var(--ink)}
+.nav-links{display:flex;align-items:center;gap:1.5rem}
+.nav-link{font-size:13px;color:var(--ink60);letter-spacing:.04em;transition:color .15s}.nav-link:hover{color:var(--ink)}
+.btn-outline{background:transparent;border:1px solid var(--gold2);color:var(--gold3);font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1.2rem;cursor:pointer;transition:all .2s}.btn-outline:hover{background:var(--gold2);color:#fff}
+.hero{text-align:center;padding:5rem 2rem 3.5rem;max-width:720px;margin:0 auto}
+.hero-rule{width:1px;height:50px;background:linear-gradient(to bottom,transparent,var(--gold2));margin:0 auto 2rem}
+.ey{font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold2);margin-bottom:1.2rem}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.1;color:var(--ink);margin-bottom:.8rem}
+.hero h1 em{font-style:italic;color:var(--gold2)}
+.hero p{font-size:15px;color:var(--ink60);line-height:1.75;max-width:500px;margin:0 auto 2rem}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;padding:1.5rem 2rem;background:#fff;border:1px solid var(--line)}
+.hstat-n{font-family:'Playfair Display',Georgia,serif;font-size:2rem;color:var(--gold2);display:block;line-height:1}
+.hstat-l{font-size:12px;color:var(--ink60);margin-top:3px}
+.controls{max-width:1100px;margin:0 auto 1.5rem;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.tabs{display:flex;border:1px solid var(--line);overflow:hidden}
+.tab-btn{padding:8px 22px;font-size:13px;border:none;background:transparent;cursor:pointer;color:var(--ink60);transition:all .15s;font-family:inherit;letter-spacing:.03em}
+.tab-btn.active{background:var(--ink);color:#fff}
+.tab-btn:not(.active):hover{background:var(--ink05);color:var(--ink)}
+.curr-group{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.curr-lbl{font-size:11px;font-weight:500;color:var(--ink60);text-transform:uppercase;letter-spacing:.06em}
+.curr-btn{padding:5px 13px;font-size:12px;border:1px solid var(--line);background:#fff;cursor:pointer;color:var(--ink60);transition:all .15s;font-family:inherit}
+.curr-btn.active{border-color:var(--gold2);background:rgba(139,105,20,.08);color:var(--gold3)}
+.curr-btn:not(.active):hover{border-color:var(--linest);color:var(--ink)}
+.main{max-width:1100px;margin:0 auto;padding:0 2rem 5rem;display:grid;grid-template-columns:380px 1fr;gap:1.5rem;align-items:start}
+@media(max-width:860px){.main{grid-template-columns:1fr}}
+.input-panel{background:#fff;border:1px solid var(--line);position:sticky;top:80px}
+.panel-head{padding:1rem 1.5rem;border-bottom:1px solid var(--line);background:var(--ink05)}
+.panel-head-title{font-size:10px;font-weight:500;color:var(--ink60);text-transform:uppercase;letter-spacing:.1em}
+.panel-body{padding:1.25rem 1.5rem}
+.field{margin-bottom:1.1rem}
+.field-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.field-label{font-size:13px;color:var(--ink60)}
+.field-value{font-size:13px;font-weight:500;color:var(--gold3);background:rgba(139,105,20,.08);padding:2px 10px;border-radius:20px}
+.field-divider{border:none;border-top:1px dashed var(--line);margin:.75rem 0}
+input[type=range]{width:100%;height:4px;-webkit-appearance:none;appearance:none;background:linear-gradient(to right,var(--gold2) 0%,var(--gold2) var(--pct,50%),var(--ink10) var(--pct,50%));border-radius:4px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--gold2);box-shadow:0 1px 4px rgba(0,0,0,.12);transition:transform .1s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--gold2);box-shadow:0 1px 4px rgba(0,0,0,.12);cursor:pointer}input[type=number]{width:68px;border:1px solid var(--line);background:#fff;padding:3px 8px;font-size:13px;font-family:inherit;color:var(--ink);text-align:center;-moz-appearance:textfield}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none}
+.results-stack{display:flex;flex-direction:column;gap:1rem}
+.result-hero{background:var(--ink);padding:2rem;color:#fff;position:relative;overflow:hidden}
+.result-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:rgba(139,105,20,.08);border-radius:50%}
+.result-hero-label{font-size:10px;font-weight:500;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.12em;margin-bottom:.5rem}
+.result-hero-amount{font-family:'Playfair Display',Georgia,serif;font-size:clamp(36px,6vw,60px);line-height:1;letter-spacing:-.02em;color:#fff;margin-bottom:.6rem}
+.result-hero-sub{font-size:14px;color:rgba(255,255,255,.5)}
+.result-hero-chips{display:flex;gap:10px;margin-top:1.2rem;flex-wrap:wrap}
+.result-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:8px 14px}
+.result-chip-num{font-size:17px;font-weight:500;color:#fff;display:block}
+.result-chip-lbl{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+.result-card{background:#fff;border:1px solid var(--line)}
+.result-card-head{padding:.85rem 1.25rem;border-bottom:1px solid var(--line);font-size:10px;font-weight:500;color:var(--ink60);text-transform:uppercase;letter-spacing:.1em;background:var(--ink05)}
+.result-card-body{padding:1.25rem}
+.metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metric-box{background:var(--ink05);padding:.9rem 1rem}
+.metric-box.accent{background:rgba(139,105,20,.08)}
+.metric-box-lbl{font-size:11px;color:var(--ink60);margin-bottom:4px}
+.metric-box.accent .metric-box-lbl{color:var(--gold2)}
+.metric-box-val{font-size:20px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.metric-box.accent .metric-box-val{color:var(--gold3)}
+.bars-section{margin-top:.25rem}
+.bar-row{margin-bottom:.9rem}
+.bar-meta{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.bar-meta-label{color:var(--ink60)}
+.bar-meta-val{color:var(--ink);font-weight:500}
+.bar-track{height:6px;background:var(--ink10);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.bar-gold{background:var(--gold2)}.bar-dark{background:var(--ink2)}.bar-mid{background:rgba(139,105,20,.4)}
+.breakdown-table{width:100%;border-collapse:collapse;font-size:13px}
+.breakdown-table tr{border-bottom:1px solid var(--line)}
+.breakdown-table tr:last-child{border-bottom:none;font-weight:500}
+.breakdown-table td{padding:9px 0}
+.breakdown-table td:first-child{color:var(--ink60)}
+.breakdown-table td:last-child{text-align:right;color:var(--ink);font-variant-numeric:tabular-nums}
+.cta-card{background:var(--ink2);padding:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.cta-text-head{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:400;color:#fff;margin-bottom:3px}
+.cta-text-sub{font-size:13px;color:rgba(255,255,255,.45)}
+.cta-btn{background:var(--gold2);color:#fff;border:none;padding:10px 22px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;letter-spacing:.08em;text-transform:uppercase;transition:background .15s;white-space:nowrap}
+.cta-btn:hover{background:var(--gold3)}
+.trust-section{max-width:1100px;margin:0 auto;padding:3rem 2rem 4rem;border-top:1px solid var(--line)}
+.trust-title{font-size:10px;font-weight:500;color:var(--ink60);text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:1.5rem}
+.trust-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap}
+.trust-stat{text-align:center}
+.trust-stat-num{font-family:'Playfair Display',Georgia,serif;font-size:2.2rem;color:var(--gold2);display:block;line-height:1}
+.trust-stat-lbl{font-size:13px;color:var(--ink60);margin-top:4px}
+footer{background:var(--ink);color:rgba(255,255,255,.35);padding:1.5rem 2rem;text-align:center;font-size:12px}
+footer a{color:rgba(255,255,255,.5)}
+.disclaimer{max-width:1100px;margin:0 auto;padding:0 2rem 2rem;font-size:11px;color:var(--ink30);line-height:1.6}
+@media(max-width:600px){nav .nav-links{display:none}nav{padding:0 1.5rem}.hero{padding:3rem 1.25rem 2.5rem}.main,.controls{padding-left:1.25rem;padding-right:1.25rem}}
+</style></head><body>
+<nav>
+  <a href="/" class="logo">LawInd</a>
+  <div class="nav-links"><a class="nav-link" href="/#platform">Platform</a><a class="nav-link" href="/#segments">Who it's for</a><a class="nav-link" href="/#contact">Contact</a></div>
+  <button class="btn-outline" onclick="window.location.href='/#contact'">Request access</button>
+</nav>
+<section class="hero">
+  <div class="hero-rule"></div>
+  <p class="ey">ROI Calculator</p>
+  <h1>See LawInd's impact<br>on <em>your practice</em></h1>
+  <p>Estimate how AI-assisted legal workflows convert non-billable time into revenue and cost savings — using conservative, research-informed assumptions.</p>
+  <div class="hero-stats">
+    <div><span class="hstat-n">93%</span><div class="hstat-l">Report reduced non-billable time</div></div>
+    <div><span class="hstat-n">37 hrs</span><div class="hstat-l">Saved per month by power users</div></div>
+    <div><span class="hstat-n">83%</span><div class="hstat-l">Improved client relationships</div></div>
+  </div>
+</section>
+<div class="controls">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="setTab('firm',this)">Law Firm</button>
+    <button class="tab-btn" onclick="setTab('inhouse',this)">In-House</button>
+  </div>
+  <div class="curr-group">
+    <span class="curr-lbl">Currency:</span>
+    <button class="curr-btn active" onclick="setCurrency('INR','₹',this)">₹ INR</button>
+    <button class="curr-btn" onclick="setCurrency('USD','$',this)">$ USD</button>
+    <button class="curr-btn" onclick="setCurrency('GBP','£',this)">£ GBP</button>
+  </div>
+</div>
+<div class="main">
+  <div class="input-panel">
+    <div id="firm-inputs">
+      <div class="panel-head"><div class="panel-head-title">Firm parameters</div></div>
+      <div class="panel-body">
+        <div class="field"><div class="field-top"><span class="field-label">Number of fee earners</span><span class="field-value" id="f-lawyers-v">15</span></div><input type="range" min="2" max="200" step="1" value="15" id="f-lawyers" oninput="calc()"></div>
+        <div class="field"><div class="field-top"><span class="field-label">Avg billable hours per year</span><span class="field-value" id="f-hours-v">1,400 hrs</span></div><input type="range" min="600" max="2400" step="50" value="1400" id="f-hours" oninput="calc()"></div>
+        <hr class="field-divider">
+        <div class="field"><div class="field-top"><span class="field-label">Avg billing rate <span id="f-rate-lbl"></span></span><span class="field-value" id="f-rate-v"></span></div><input type="range" min="1000" max="50000" step="500" value="8000" id="f-rate" oninput="calc()"></div>
+        <div class="field"><div class="field-top"><span class="field-label">Non-billable time (% of total)</span><span class="field-value" id="f-nonbill-v">30%</span></div><input type="range" min="10" max="60" step="1" value="30" id="f-nonbill" oninput="calc()"></div>
+        <hr class="field-divider">
+        <div class="field"><div class="field-top"><span class="field-label">AI time savings on non-billable work</span><span class="field-value" id="f-saving-v">35%</span></div><input type="range" min="10" max="60" step="1" value="35" id="f-saving" oninput="calc()"></div>
+        <div class="field"><div class="field-top"><span class="field-label">Recovered time converted to billable</span><span class="field-value" id="f-convert-v">40%</span></div><input type="range" min="10" max="80" step="5" value="40" id="f-convert" oninput="calc()"></div>
+        <div class="field"><div class="field-top"><span class="field-label">Profit margin on new revenue</span><span class="field-value" id="f-margin-v">35%</span></div><input type="range" min="10" max="60" step="5" value="35" id="f-margin" oninput="calc()"></div>
+      </div>
+    </div>
+    <div id="inhouse-inputs" style="display:none">
+      <div class="panel-head"><div class="panel-head-title">Team parameters</div></div>
+      <div class="panel-body">
+        <div class="field"><div class="field-top"><span class="field-label">Number of in-house lawyers</span><span class="field-value" id="ih-lawyers-v">4</span></div><input type="range" min="1" max="100" step="1" value="4" id="ih-lawyers" oninput="calc()"></div>
+        <div class="field"><div class="field-top"><span class="field-label">Avg fully-loaded cost <span id="ih-cost-lbl"></span></span><span class="field-value" id="ih-cost-v"></span></div><input type="range" min="500000" max="5000000" step="100000" value="1500000" id="ih-cost" oninput="calc()"></div>
+        <hr class="field-divider">
+        <div class="field"><div class="field-top"><span class="field-label">Hours/week on routine tasks</span><span class="field-value" id="ih-routine-v">15 hrs</span></div><input type="range" min="4" max="40" step="1" value="15" id="ih-routine" oninput="calc()"></div>
+        <div class="field"><div class="field-top"><span class="field-label">AI reduction in routine workload</span><span class="field-value" id="ih-saving-v">40%</span></div><input type="range" min="10" max="70" step="5" value="40" id="ih-saving" oninput="calc()"></div>
+        <hr class="field-divider">
+        <div class="field"><div class="field-top"><span class="field-label">External counsel rate <span id="ih-rate-lbl"></span></span><span class="field-value" id="ih-extrate-v"></span></div><input type="range" min="5000" max="50000" step="1000" value="12000" id="ih-extrate" oninput="calc()"></div>
+        <div class="field"><div class="field-top"><span class="field-label">Work shifted from external counsel</span><span class="field-value" id="ih-shift-v">25%</span></div><input type="range" min="5" max="60" step="5" value="25" id="ih-shift" oninput="calc()"></div>
+      </div>
+    </div>
+  </div>
+  <div class="results-stack" id="results-container"></div>
+</div>
+<div class="trust-section">
+  <div class="trust-title">Based on research across Indian legal professionals</div>
+  <div class="trust-stats">
+    <div class="trust-stat"><span class="trust-stat-num">1.7M</span><div class="trust-stat-lbl">Indian lawyers</div></div>
+    <div class="trust-stat"><span class="trust-stat-num">18+ hrs</span><div class="trust-stat-lbl">Saved per lawyer per month</div></div>
+    <div class="trust-stat"><span class="trust-stat-num">60%</span><div class="trust-stat-lbl">Faster contract review</div></div>
+    <div class="trust-stat"><span class="trust-stat-num">$1B+</span><div class="trust-stat-lbl">Indian legaltech market by 2027</div></div>
+  </div>
+</div>
+<div class="disclaimer"><strong>Disclaimer:</strong> All figures are estimates based on industry research and conservative assumptions. Actual results will vary depending on firm size, practice area, and individual usage patterns. LawInd does not guarantee any specific financial outcomes.</div>
+<footer><a href="/">LawInd</a> &nbsp;·&nbsp; Built in India, for India &nbsp;·&nbsp; <a href="mailto:hello@lawind.ai">hello@lawind.ai</a></footer>
+<script>
+let currSym='₹',currCode='INR',activeTab='firm';
+function setCurrency(code,sym,el){currSym=sym;currCode=code;document.querySelectorAll('.curr-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');const r={INR:1,USD:0.012,GBP:0.0095}[code];document.getElementById('f-rate').min=Math.round(1000*r);document.getElementById('f-rate').max=Math.round(50000*r);document.getElementById('f-rate').step=Math.round(500*r)||1;document.getElementById('f-rate').value=Math.round(8000*r);document.getElementById('ih-cost').min=Math.round(500000*r);document.getElementById('ih-cost').max=Math.round(5000000*r);document.getElementById('ih-cost').step=Math.round(100000*r)||1;document.getElementById('ih-cost').value=Math.round(1500000*r);document.getElementById('ih-extrate').min=Math.round(5000*r);document.getElementById('ih-extrate').max=Math.round(50000*r);document.getElementById('ih-extrate').step=Math.round(1000*r)||1;document.getElementById('ih-extrate').value=Math.round(12000*r);calc();}
+function setTab(tab,el){activeTab=tab;document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('firm-inputs').style.display=tab==='firm'?'':'none';document.getElementById('inhouse-inputs').style.display=tab==='inhouse'?'':'none';calc();}
+function initRanges(){document.querySelectorAll('input[type=range]').forEach(r=>{r.addEventListener('input',()=>{const p=(r.value-r.min)/(r.max-r.min)*100;r.style.setProperty('--pct',p+'%')});const p=(r.value-r.min)/(r.max-r.min)*100;r.style.setProperty('--pct',p+'%')});}
+function fmt(n){if(currCode==='INR'){if(n>=10000000)return currSym+(n/10000000).toFixed(1)+'Cr';if(n>=100000)return currSym+(n/100000).toFixed(1)+'L';if(n>=1000)return currSym+Math.round(n/1000)+'K';return currSym+Math.round(n).toLocaleString();}if(n>=1000000)return currSym+(n/1000000).toFixed(1)+'M';if(n>=1000)return currSym+(n/1000).toFixed(1)+'K';return currSym+Math.round(n).toLocaleString();}
+function fmtH(n){return Math.round(n).toLocaleString()+' hrs';}
+function calc(){activeTab==='firm'?calcFirm():calcInhouse();}
+function calcFirm(){const lawyers=+document.getElementById('f-lawyers').value,hours=+document.getElementById('f-hours').value,rate=+document.getElementById('f-rate').value,nonbill=+document.getElementById('f-nonbill').value/100,savPct=+document.getElementById('f-saving').value/100,convPct=+document.getElementById('f-convert').value/100,margin=+document.getElementById('f-margin').value/100;document.getElementById('f-lawyers-v').textContent=lawyers;document.getElementById('f-hours-v').textContent=hours.toLocaleString()+' hrs';document.getElementById('f-rate-lbl').textContent='('+currSym+'/hr)';document.getElementById('f-rate-v').textContent=fmt(rate);document.getElementById('f-nonbill-v').textContent=Math.round(nonbill*100)+'%';document.getElementById('f-saving-v').textContent=Math.round(savPct*100)+'%';document.getElementById('f-convert-v').textContent=Math.round(convPct*100)+'%';document.getElementById('f-margin-v').textContent=Math.round(margin*100)+'%';const nonBillHrs=hours*nonbill,savedPerLawyer=nonBillHrs*savPct,totalSavedHrs=savedPerLawyer*lawyers,totalBillHrs=totalSavedHrs*convPct,totalRev=totalBillHrs*rate,totalProfit=totalRev*margin,revPerLawyer=totalRev/lawyers,bT=Math.min(100,savPct*150),bB=Math.min(100,convPct*125),bA=Math.min(100,margin*160);document.getElementById('results-container').innerHTML=`<div class="result-hero"><div class="result-hero-label">Total annual profit uplift</div><div class="result-hero-amount">${fmt(totalProfit)}</div><div class="result-hero-sub">Across ${lawyers} fee earner${lawyers>1?'s':''}</div><div class="result-hero-chips"><div class="result-chip"><span class="result-chip-num">${fmt(totalRev)}</span><div class="result-chip-lbl">New revenue per year</div></div><div class="result-chip"><span class="result-chip-num">${fmtH(totalSavedHrs)}</span><div class="result-chip-lbl">Hours saved annually</div></div><div class="result-chip"><span class="result-chip-num">${Math.round(savedPerLawyer)} hrs</span><div class="result-chip-lbl">Hrs saved / lawyer / yr</div></div></div></div><div class="result-card"><div class="result-card-head">Revenue breakdown</div><div class="result-card-body"><div class="metrics-grid"><div class="metric-box accent"><div class="metric-box-lbl">New revenue</div><div class="metric-box-val">${fmt(totalRev)}</div></div><div class="metric-box accent"><div class="metric-box-lbl">Incremental profit</div><div class="metric-box-val">${fmt(totalProfit)}</div></div><div class="metric-box"><div class="metric-box-lbl">New billable hours</div><div class="metric-box-val">${fmtH(totalBillHrs)}</div></div><div class="metric-box"><div class="metric-box-lbl">Hrs saved / lawyer / yr</div><div class="metric-box-val">${Math.round(savedPerLawyer)}</div></div></div></div></div><div class="result-card"><div class="result-card-head">Where the time goes</div><div class="result-card-body bars-section"><div class="bar-row"><div class="bar-meta"><span class="bar-meta-label">AI savings on non-billable work</span><span class="bar-meta-val">${Math.round(savPct*100)}%</span></div><div class="bar-track"><div class="bar-fill bar-gold" style="width:${bT}%"></div></div></div><div class="bar-row"><div class="bar-meta"><span class="bar-meta-label">Recovered hours converted to billable</span><span class="bar-meta-val">${Math.round(convPct*100)}%</span></div><div class="bar-track"><div class="bar-fill bar-dark" style="width:${bB}%"></div></div></div><div class="bar-row"><div class="bar-meta"><span class="bar-meta-label">Profit margin on new revenue</span><span class="bar-meta-val">${Math.round(margin*100)}%</span></div><div class="bar-track"><div class="bar-fill bar-mid" style="width:${bA}%"></div></div></div></div></div><div class="result-card"><div class="result-card-head">Full year summary</div><div class="result-card-body"><table class="breakdown-table"><tr><td>Total non-billable hours</td><td>${fmtH(nonBillHrs*lawyers)}</td></tr><tr><td>Hours recovered by AI</td><td>${fmtH(totalSavedHrs)}</td></tr><tr><td>New billable hours (firm-wide)</td><td>${fmtH(totalBillHrs)}</td></tr><tr><td>New revenue per lawyer</td><td>${fmt(revPerLawyer)}</td></tr><tr><td>Total revenue uplift</td><td>${fmt(totalRev)}</td></tr><tr><td>Total incremental profit</td><td>${fmt(totalProfit)}</td></tr></table></div></div><div class="cta-card"><div><div class="cta-text-head">Ready to realise this ROI?</div><div class="cta-text-sub">See how LawInd fits your firm's specific workflow</div></div><button class="cta-btn" onclick="window.location.href='/#contact'">Request access →</button></div>`;}
+function calcInhouse(){const lawyers=+document.getElementById('ih-lawyers').value,cost=+document.getElementById('ih-cost').value,routine=+document.getElementById('ih-routine').value,savPct=+document.getElementById('ih-saving').value/100,extRate=+document.getElementById('ih-extrate').value,shiftPct=+document.getElementById('ih-shift').value/100;document.getElementById('ih-lawyers-v').textContent=lawyers;document.getElementById('ih-cost-lbl').textContent='('+currSym+'/yr)';document.getElementById('ih-cost-v').textContent=fmt(cost);document.getElementById('ih-routine-v').textContent=routine+' hrs';document.getElementById('ih-saving-v').textContent=Math.round(savPct*100)+'%';document.getElementById('ih-rate-lbl').textContent='('+currSym+'/hr)';document.getElementById('ih-extrate-v').textContent=fmt(extRate);document.getElementById('ih-shift-v').textContent=Math.round(shiftPct*100)+'%';const annualRoutine=routine*52*lawyers,savedHrs=annualRoutine*savPct,internalRate=cost/2080,internalSaving=savedHrs*internalRate,externalSaving=annualRoutine*shiftPct*extRate,totalSaving=internalSaving+externalSaving,perLawyerMo=(savedHrs/lawyers)/12,bT=Math.min(100,savPct*150),bB=Math.min(100,shiftPct*300),bA=Math.min(100,internalSaving/totalSaving*100);document.getElementById('results-container').innerHTML=`<div class="result-hero"><div class="result-hero-label">Total annual savings</div><div class="result-hero-amount">${fmt(totalSaving)}</div><div class="result-hero-sub">Across ${lawyers} in-house lawyer${lawyers>1?'s':''}</div><div class="result-hero-chips"><div class="result-chip"><span class="result-chip-num">${fmt(externalSaving)}</span><div class="result-chip-lbl">External spend avoided</div></div><div class="result-chip"><span class="result-chip-num">${fmtH(savedHrs)}</span><div class="result-chip-lbl">Hours freed annually</div></div><div class="result-chip"><span class="result-chip-num">${Math.round(perLawyerMo)} hrs</span><div class="result-chip-lbl">Hrs freed / lawyer / mo</div></div></div></div><div class="result-card"><div class="result-card-head">Savings breakdown</div><div class="result-card-body"><div class="metrics-grid"><div class="metric-box accent"><div class="metric-box-lbl">External spend avoided</div><div class="metric-box-val">${fmt(externalSaving)}</div></div><div class="metric-box accent"><div class="metric-box-lbl">Internal time value</div><div class="metric-box-val">${fmt(internalSaving)}</div></div><div class="metric-box"><div class="metric-box-lbl">Routine hours / yr</div><div class="metric-box-val">${Math.round(annualRoutine).toLocaleString()}</div></div><div class="metric-box"><div class="metric-box-lbl">Hours saved by AI</div><div class="metric-box-val">${Math.round(savedHrs).toLocaleString()}</div></div></div></div></div><div class="result-card"><div class="result-card-head">Where savings come from</div><div class="result-card-body bars-section"><div class="bar-row"><div class="bar-meta"><span class="bar-meta-label">AI reduction in routine workload</span><span class="bar-meta-val">${Math.round(savPct*100)}%</span></div><div class="bar-track"><div class="bar-fill bar-gold" style="width:${bT}%"></div></div></div><div class="bar-row"><div class="bar-meta"><span class="bar-meta-label">Work shifted from external counsel</span><span class="bar-meta-val">${Math.round(shiftPct*100)}%</span></div><div class="bar-track"><div class="bar-fill bar-dark" style="width:${bB}%"></div></div></div><div class="bar-row"><div class="bar-meta"><span class="bar-meta-label">Internal time as % of total saving</span><span class="bar-meta-val">${Math.round(internalSaving/totalSaving*100)}%</span></div><div class="bar-track"><div class="bar-fill bar-mid" style="width:${bA}%"></div></div></div></div></div><div class="result-card"><div class="result-card-head">Full year summary</div><div class="result-card-body"><table class="breakdown-table"><tr><td>Total routine hours per year</td><td>${fmtH(annualRoutine)}</td></tr><tr><td>Hours saved by AI</td><td>${fmtH(savedHrs)}</td></tr><tr><td>Internal time value recovered</td><td>${fmt(internalSaving)}</td></tr><tr><td>External counsel spend avoided</td><td>${fmt(externalSaving)}</td></tr><tr><td>Total annual saving</td><td>${fmt(totalSaving)}</td></tr></table></div></div><div class="cta-card"><div><div class="cta-text-head">Ready to realise these savings?</div><div class="cta-text-sub">See how LawInd works for your in-house team</div></div><button class="cta-btn" onclick="window.location.href='/#contact'">Request access →</button></div>`;}
+
+initRanges();calc();
+</script>
+</body></html>

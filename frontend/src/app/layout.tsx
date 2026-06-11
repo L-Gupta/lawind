@@ -1,23 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 
-import { AppShell } from "@/components/layout/app-shell";
+import { Footer } from "@/components/layout/footer";
+import { Nav } from "@/components/layout/nav";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
-  title: "Lawind AI",
+  title: "LawInd | AI-powered legal intelligence for India",
   description:
-    "AI-powered legal intelligence platform for the Indian legal ecosystem",
+    "LawInd combines artificial intelligence with Indian legal knowledge to make legal work faster, more accurate, and more accessible.",
 };
 
 export default function RootLayout({
@@ -26,12 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">
-        <AppShell>{children}</AppShell>
+    <html lang="en" className={playfair.variable}>
+      <body>
+        <Nav />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );
