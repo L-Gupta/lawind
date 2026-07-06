@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { getUser, logout, PLAN_FEATURES, UserOut } from "@/lib/auth";
 import { useRouter } from "next/navigation";
 
@@ -58,7 +59,7 @@ export default function DashboardPage() {
           {user.plan === "free" && (
             <div className="upgrade-banner">
               <p>Upgrade to unlock full legal research, drafting, and more.</p>
-              <a href="/#pricing" className="btn-primary" style={{ fontSize: "12px", padding: "0.6rem 1.4rem" }}>View plans</a>
+              <Link href="/#pricing" className="btn-primary" style={{ fontSize: "12px", padding: "0.6rem 1.4rem" }}>View plans</Link>
             </div>
           )}
         </div>
