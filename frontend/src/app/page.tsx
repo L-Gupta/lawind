@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const platformFeatures = [
@@ -46,25 +47,36 @@ export default function Home() {
   return (
     <>
       <section className="home-hero">
-        <div className="hero-rule" />
-        <p className="ey">Indian legal intelligence</p>
-        <h1>
-          The operating system for
-          <br />
-          <em>Indian legal practice</em>
-        </h1>
-        <p>
-          LawInd combines artificial intelligence with Indian legal knowledge —
-          judgments, statutes, and workflows — to make legal work faster, more
-          accurate, and more accessible.
-        </p>
-        <div className="hero-actions">
-          <Link href="/#contact" className="btn-primary">
-            Request access
-          </Link>
-          <Link href="/roi" className="btn-outline">
-            Calculate your ROI
-          </Link>
+        <div className="home-hero-left">
+          <div className="hero-rule" />
+          <p className="ey">Indian legal intelligence</p>
+          <h1>
+            The operating system for
+            <br />
+            <em>Indian legal practice</em>
+          </h1>
+          <p>
+            LawInd combines artificial intelligence with Indian legal knowledge —
+            judgments, statutes, and workflows — to make legal work faster, more
+            accurate, and more accessible.
+          </p>
+          <div className="hero-actions">
+            <Link href="/#contact" className="btn-primary">
+              Request access
+            </Link>
+            <Link href="/roi" className="btn-outline">
+              Calculate your ROI
+            </Link>
+          </div>
+        </div>
+        <div className="home-hero-right">
+          <Image
+            src="/ladyjustice.png"
+            alt="Lady Justice"
+            width={1024}
+            height={1536}
+            priority
+          />
         </div>
       </section>
 

@@ -20,10 +20,18 @@ export function Nav() {
             {link.label}
           </Link>
         ))}
+        <Link href="/login" className="nav-link">
+          Sign in
+        </Link>
       </div>
-      <Link href="/#contact" className="btn-outline">
-        Request access
-      </Link>
+      <div className="nav-actions">
+        <Link href="/signup" className="btn-primary">
+          Sign up
+        </Link>
+        <Link href="/#contact" className="btn-outline">
+          Request access
+        </Link>
+      </div>
     </nav>
   );
 }
