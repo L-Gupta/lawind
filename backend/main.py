@@ -1,14 +1,27 @@
+from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config.settings import settings
+from core.database import init_db
+from core.seed import seed_founders
+from routers.auth import router as auth_router
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await init_db()
+    await seed_founders()
+    yield
+
 
 app = FastAPI(
     title="Lawind AI API",
     description="AI-powered legal intelligence platform for the Indian legal ecosystem",
     version="0.1.0",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -18,6 +31,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
 
 
 @app.get("/")
