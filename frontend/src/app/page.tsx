@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { WaitlistForm } from "@/components/waitlist-form";
 
 const platformFeatures = [
   {
@@ -145,9 +146,7 @@ export default function Home() {
           We&apos;re onboarding law firms and in-house teams across India. Join
           the waitlist to be first when we launch.
         </p>
-        <a href="mailto:hello@lawind.ai" className="btn-primary">
-          hello@lawind.ai
-        </a>
+        <WaitlistForm />
       </section>
     </>
   );

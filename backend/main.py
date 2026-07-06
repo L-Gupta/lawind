@@ -7,7 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from config.settings import settings
 from core.database import init_db
 from core.seed import seed_founders
+from models import waitlist as _waitlist_model  # noqa: F401 - registers table with Base metadata
 from routers.auth import router as auth_router
+from routers.waitlist import router as waitlist_router
 
 
 @asynccontextmanager
@@ -33,6 +35,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(waitlist_router)
 
 
 @app.get("/")
