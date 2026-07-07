@@ -1,89 +1,177 @@
 "use client";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { getUser, logout, PLAN_FEATURES, UserOut } from "@/lib/auth";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { logout } from "@/lib/auth";
 
-const PLATFORM_FEATURES = [
-  { key: "research", title: "Legal Research", desc: "Search SC, HC judgments, statutes, SEBI & RBI circulars", plans: ["student", "individual", "firm", "enterprise"] },
-  { key: "drafting", title: "AI Drafting Studio", desc: "Generate petitions, contracts and notices from plain English", plans: ["individual", "firm", "enterprise"] },
-  { key: "contracts", title: "Contract Intelligence", desc: "Review, redline and benchmark contracts automatically", plans: ["firm", "enterprise"] },
-  { key: "matters", title: "Matter Management", desc: "Cases, clients, deadlines and documents in one place", plans: ["individual", "firm", "enterprise"] },
-  { key: "diligence", title: "Due Diligence", desc: "Bulk-analyze data rooms and produce deal-ready reports", plans: ["firm", "enterprise"] },
-  { key: "agents", title: "Workflow Agents", desc: "End-to-end automation for regulatory filings and briefs", plans: ["enterprise"] },
+type PanelKey = "research" | "drafting" | "contracts" | "matters" | "diligence" | "agents";
+
+interface NavItem {
+  key: PanelKey;
+  label: string;
+  locked: boolean;
+}
+
+const NAV_ITEMS: NavItem[] = [
+  { key: "research", label: "Research", locked: false },
+  { key: "drafting", label: "Drafting Studio", locked: false },
+  { key: "contracts", label: "Contract Review", locked: true },
+  { key: "matters", label: "Matter Management", locked: true },
+  { key: "diligence", label: "Due Diligence", locked: true },
+  { key: "agents", label: "Workflow Agents", locked: true },
 ];
 
-const PLAN_LABELS: Record<string, string> = {
-  free: "Free",
-  student: "Student",
-  individual: "Individual",
-  firm: "Firm",
-  enterprise: "Enterprise",
+const EXAMPLE_QUERIES = [
+  "What are the grounds for anticipatory bail under BNSS?",
+  "Landmark SC judgments on Section 138 NI Act",
+  "SEBI insider trading regulations 2015",
+];
+
+const LOCKED_PANEL_COPY: Record<Exclude<PanelKey, "research" | "drafting">, { title: string; sub: string }> = {
+  contracts: { title: "Contract Intelligence", sub: "Available on Firm plan and above" },
+  matters: { title: "Matter Management", sub: "Available on Individual plan and above" },
+  diligence: { title: "Due Diligence", sub: "Available on Firm plan and above" },
+  agents: { title: "Workflow Agents", sub: "Available on Enterprise plan only" },
 };
 
-export default function DashboardPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<UserOut | null>(null);
-
-  useEffect(() => {
-    const u = getUser();
-    if (!u) { router.push("/login"); return; }
-    setUser(u);
-  }, [router]);
-
-  if (!user) return null;
-
-  const planFeatures = PLAN_FEATURES[user.plan] || [];
+function ResearchPanel() {
+  const [query, setQuery] = useState("");
 
   return (
-    <div className="dashboard">
-      <div className="dash-header">
-        <div>
-          <p className="ey">Dashboard</p>
-          <h1 className="dash-title">Welcome, <em>{user.full_name.split(" ")[0]}</em></h1>
-        </div>
-        <div className="dash-plan-badge">
-          <span className="plan-label">{PLAN_LABELS[user.plan]} Plan</span>
-          <button onClick={logout} className="btn-outline" style={{ fontSize: "11px", padding: "0.35rem 1rem" }}>Sign out</button>
-        </div>
+    <div className="dash-panel">
+      <p className="ey">Research</p>
+      <h1 className="panel-title">Legal Research</h1>
+
+      <div className="research-search-bar">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Ask anything about Indian law..."
+        />
+        <button className="btn-primary">Search</button>
       </div>
 
-      <div className="dash-body">
-        <div className="dash-section">
-          <h2 className="dash-section-title">Your plan includes</h2>
-          <ul className="plan-features">
-            {planFeatures.map(f => (
-              <li key={f}><span className="check">✓</span>{f}</li>
-            ))}
-          </ul>
-          {user.plan === "free" && (
-            <div className="upgrade-banner">
-              <p>Upgrade to unlock full legal research, drafting, and more.</p>
-              <Link href="/#pricing" className="btn-primary" style={{ fontSize: "12px", padding: "0.6rem 1.4rem" }}>View plans</Link>
-            </div>
-          )}
-        </div>
+      <div className="research-chips">
+        {EXAMPLE_QUERIES.map((q) => (
+          <button key={q} className="research-chip" onClick={() => setQuery(q)}>
+            {q}
+          </button>
+        ))}
+      </div>
 
-        <div className="dash-section">
-          <h2 className="dash-section-title">Platform features</h2>
-          <div className="feature-grid">
-            {PLATFORM_FEATURES.map(f => {
-              const unlocked = f.plans.includes(user.plan);
-              return (
-                <div key={f.key} className={`dash-feature-card ${unlocked ? "unlocked" : "locked"}`}>
-                  <div className="dash-feature-top">
-                    <h3>{f.title}</h3>
-                    <span className={`access-badge ${unlocked ? "access-yes" : "access-no"}`}>
-                      {unlocked ? "Available" : "Upgrade"}
-                    </span>
-                  </div>
-                  <p>{f.desc}</p>
-                </div>
-              );
-            })}
+      <div className="research-results-empty">
+        Your research results will appear here
+      </div>
+    </div>
+  );
+}
+
+function DraftingPanel() {
+  return (
+    <div className="dash-panel">
+      <p className="ey">Drafting Studio</p>
+      <h1 className="panel-title">AI Drafting Studio</h1>
+
+      <div className="drafting-grid">
+        <div className="drafting-form">
+          <div className="form-field">
+            <label>Document type</label>
+            <select defaultValue="Legal Notice">
+              <option>Legal Notice</option>
+              <option>NDA</option>
+              <option>Petition</option>
+              <option>Agreement</option>
+              <option>Vakalatnama</option>
+            </select>
           </div>
+          <div className="form-field">
+            <label>Description</label>
+            <textarea placeholder="Describe what you need in plain English..." />
+          </div>
+          <button className="btn-primary">Generate</button>
+        </div>
+        <div className="drafting-preview">
+          Your drafted document will appear here
         </div>
       </div>
+    </div>
+  );
+}
+
+function LockedPanel({ panelKey }: { panelKey: Exclude<PanelKey, "research" | "drafting"> }) {
+  const copy = LOCKED_PANEL_COPY[panelKey];
+  return (
+    <div className="dash-panel">
+      <div className="locked-panel">
+        <h2>{copy.title}</h2>
+        <p>{copy.sub}</p>
+        <button className="btn-primary">Upgrade plan</button>
+      </div>
+    </div>
+  );
+}
+
+export default function DashboardPage() {
+  const [activePanel, setActivePanel] = useState<PanelKey>("research");
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  function selectPanel(key: PanelKey) {
+    setActivePanel(key);
+    setSidebarOpen(false);
+  }
+
+  return (
+    <div className="dashboard-layout">
+      <div className="dashboard-topbar">
+        <button
+          className="sidebar-hamburger"
+          aria-label="Toggle menu"
+          onClick={() => setSidebarOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+        <span className="dashboard-topbar-logo">LawInd</span>
+      </div>
+
+      {sidebarOpen && (
+        <div className="dashboard-overlay" onClick={() => setSidebarOpen(false)} />
+      )}
+
+      <aside className={`dashboard-sidebar ${sidebarOpen ? "open" : ""}`}>
+        <div className="sidebar-logo">LawInd</div>
+
+        <div className="sidebar-user">
+          <p className="sidebar-user-name">Adv. Priya Sharma</p>
+          <span className="sidebar-plan-badge">Solo Advocate</span>
+        </div>
+
+        <nav className="sidebar-nav">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.key}
+              className={`sidebar-nav-item ${activePanel === item.key ? "active" : ""} ${item.locked ? "locked" : ""}`}
+              onClick={() => selectPanel(item.key)}
+            >
+              <span className="sidebar-icon-placeholder" />
+              <span className="sidebar-nav-label">{item.label}</span>
+              {item.locked && <span className="sidebar-lock">🔒</span>}
+            </button>
+          ))}
+        </nav>
+
+        <button className="sidebar-signout" onClick={logout}>
+          Sign out
+        </button>
+      </aside>
+
+      <main className="dashboard-main">
+        {activePanel === "research" && <ResearchPanel />}
+        {activePanel === "drafting" && <DraftingPanel />}
+        {activePanel !== "research" && activePanel !== "drafting" && (
+          <LockedPanel panelKey={activePanel} />
+        )}
+      </main>
     </div>
   );
 }

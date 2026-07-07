@@ -28,19 +28,19 @@ const platformFeatures = [
 const segments = [
   {
     title: "Law Firms",
-    description: "From solo advocates to mid-market firms — research and draft faster.",
-  },
-  {
-    title: "In-House Teams",
-    description: "Reduce external counsel spend and free your team for strategic work.",
+    description: "From Tier-1 full-service firms to specialized boutiques. Scale the expertise of your best partners across every matter, every team, every associate.",
   },
   {
     title: "Solo Advocates",
-    description: "Access institutional-grade legal intelligence without the overhead.",
+    description: "India's 1.3 million solo practitioners who can't afford SCC Online at ₹80,000/year. Affordable, powerful research at a fraction of the cost.",
   },
   {
     title: "Law Students",
-    description: "Learn citation, research, and drafting with India-first legal AI.",
+    description: "Research that takes 8 hours now takes 45 minutes. Built for NLU students, moot court competitors, and the next generation of Indian advocates.",
+  },
+  {
+    title: "In-House Legal",
+    description: "GCs at listed companies, MNCs, and funded startups. Reduce external counsel spend and free your team for strategic work.",
   },
 ];
 
@@ -114,13 +114,11 @@ export default function Home() {
             Who it&apos;s for
           </p>
           <h2 className="section-title">
-            Built for every corner of
-            <br />
-            <em>Indian legal practice</em>
+            Built for every lawyer <em>in India</em>
           </h2>
           <p className="section-sub">
-            From the Supreme Court to your first moot — LawInd is designed for
-            the Indian legal ecosystem.
+            From the Supreme Court to your first moot — LawInd is built for
+            the full breadth of Indian legal practice.
           </p>
           <div className="card-grid">
             {segments.map((segment) => (
