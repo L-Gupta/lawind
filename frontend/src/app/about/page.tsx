@@ -1,19 +1,25 @@
 import Link from "next/link";
 
-const founders = [
+const whatWeDo = [
   {
-    initials: "SN",
-    name: "Sannah Nagpal",
-    title: "Chief Executive Officer & Co-Founder",
+    title: "Legal Research",
     description:
-      "Sannah leads LawInd's vision, strategy, and operations. With a deep understanding of the Indian legal market and a passion for making legal intelligence accessible, she is building LawInd into India's default legal operating system.",
+      "Natural language search across Supreme Court judgments, High Court decisions, statutes, and regulations — with sources you can verify.",
   },
   {
-    initials: "SM",
-    name: "Shlok Maurya",
-    title: "Founder & IP Originator",
+    title: "AI Drafting Studio",
     description:
-      "Shlok conceived and originated the LawInd platform — its architecture, positioning, and product vision. As the intellectual property originator and strategic advisor, he shapes the long-term direction of the company.",
+      "Generate NDAs, agreements, notices, and petitions from plain English instructions, in minutes instead of hours.",
+  },
+  {
+    title: "Contract Review",
+    description:
+      "Clause extraction, risk identification, redline suggestions, and compliance analysis on every document you upload.",
+  },
+  {
+    title: "Matter Management",
+    description:
+      "Case tracking, hearing schedules, client management, and team collaboration in one place.",
   },
 ];
 
@@ -48,19 +54,26 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="section" style={{ maxWidth: "none" }}>
+      <section className="section">
         <p className="ey" style={{ textAlign: "center" }}>
-          The founding team
+          What we do
         </p>
-        <div className="founders-grid">
-          {founders.map((founder) => (
-            <div key={founder.name} className="founder-card">
-              <div className="founder-avatar">
-                <span>{founder.initials}</span>
-              </div>
-              <h3 className="founder-name">{founder.name}</h3>
-              <p className="founder-title">{founder.title}</p>
-              <p className="founder-desc">{founder.description}</p>
+        <h2 className="section-title">
+          One platform for every part of
+          <br />
+          <em>Indian legal work</em>
+        </h2>
+        <p className="section-sub">
+          Instead of stitching together disconnected tools for research,
+          drafting, contract review, and matter management, LawInd combines
+          artificial intelligence with Indian legal knowledge to make legal
+          work faster, more accurate, and more accessible.
+        </p>
+        <div className="card-grid">
+          {whatWeDo.map((item) => (
+            <div key={item.title} className="feature-card">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
             </div>
           ))}
         </div>
