@@ -4,6 +4,7 @@ const links = [
   { href: "/#platform", label: "Platform" },
   { href: "/#segments", label: "Who it's for" },
   { href: "/roi", label: "ROI Calculator" },
+  { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/resources", label: "Resources" },
 ];

@@ -1086,3 +1086,126 @@ body:has(.dashboard-layout) .site-footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ── About / founders page ── */
+.about-hero {
+  text-align: center;
+  padding: 6rem 2rem 4rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.founders-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 3rem auto 0;
+  padding: 0 2rem;
+}
+
+.founder-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 2.5rem;
+}
+
+.founder-avatar {
+  width: 80px;
+  height: 80px;
+  background: rgba(160, 120, 32, 0.1);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.founder-avatar span {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--gold2);
+}
+
+.founder-name {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+}
+
+.founder-title {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  font-family: system-ui, sans-serif;
+  margin-bottom: 0.75rem;
+}
+
+.founder-desc {
+  font-size: 14px;
+  color: var(--ink60);
+  line-height: 1.75;
+  font-family: system-ui, sans-serif;
+}
+
+.mission-section {
+  background: var(--ink);
+  padding: 5rem 2rem;
+  text-align: center;
+}
+
+.mission-section h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.mission-section h2 em {
+  font-style: italic;
+  color: var(--gold2);
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 3rem auto 0;
+  text-align: left;
+}
+
+.mission-point-title {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  font-family: system-ui, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.mission-point-text {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.75;
+  font-family: system-ui, sans-serif;
+}
+
+.about-contact {
+  text-align: center;
+  padding: 4rem 2rem;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 600px) {
+  .founders-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mission-grid {
+    grid-template-columns: 1fr;
+  }
+}
