@@ -13,10 +13,10 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { key: "research", label: "Research", locked: false },
   { key: "drafting", label: "Drafting Studio", locked: false },
-  { key: "contracts", label: "Contract Review", locked: true },
-  { key: "matters", label: "Matter Management", locked: true },
-  { key: "diligence", label: "Due Diligence", locked: true },
-  { key: "agents", label: "Workflow Agents", locked: true },
+  { key: "contracts", label: "Contract Review", locked: false },
+  { key: "matters", label: "Matter Management", locked: false },
+  { key: "diligence", label: "Due Diligence", locked: false },
+  { key: "agents", label: "Workflow Agents", locked: false },
 ];
 
 const EXAMPLE_QUERIES = [
@@ -25,11 +25,11 @@ const EXAMPLE_QUERIES = [
   "SEBI insider trading regulations 2015",
 ];
 
-const LOCKED_PANEL_COPY: Record<Exclude<PanelKey, "research" | "drafting">, { title: string; sub: string }> = {
-  contracts: { title: "Contract Intelligence", sub: "Available on Firm plan and above" },
-  matters: { title: "Matter Management", sub: "Available on Individual plan and above" },
-  diligence: { title: "Due Diligence", sub: "Available on Firm plan and above" },
-  agents: { title: "Workflow Agents", sub: "Available on Enterprise plan only" },
+const COMING_SOON_COPY: Record<Exclude<PanelKey, "research" | "drafting">, { title: string }> = {
+  contracts: { title: "Contract Intelligence" },
+  matters: { title: "Matter Management" },
+  diligence: { title: "Due Diligence" },
+  agents: { title: "Workflow Agents" },
 };
 
 function ResearchPanel() {
@@ -97,14 +97,13 @@ function DraftingPanel() {
   );
 }
 
-function LockedPanel({ panelKey }: { panelKey: Exclude<PanelKey, "research" | "drafting"> }) {
-  const copy = LOCKED_PANEL_COPY[panelKey];
+function ComingSoonPanel({ panelKey }: { panelKey: Exclude<PanelKey, "research" | "drafting"> }) {
+  const copy = COMING_SOON_COPY[panelKey];
   return (
     <div className="dash-panel">
       <div className="locked-panel">
         <h2>{copy.title}</h2>
-        <p>{copy.sub}</p>
-        <button className="btn-primary">Upgrade plan</button>
+        <p>Coming soon</p>
       </div>
     </div>
   );
@@ -142,8 +141,8 @@ export default function DashboardPage() {
         <div className="sidebar-logo">LawInd</div>
 
         <div className="sidebar-user">
-          <p className="sidebar-user-name">Adv. Priya Sharma</p>
-          <span className="sidebar-plan-badge">Solo Advocate</span>
+          <p className="sidebar-user-name">Admin</p>
+          <span className="sidebar-plan-badge">All Plans</span>
         </div>
 
         <nav className="sidebar-nav">
@@ -169,7 +168,7 @@ export default function DashboardPage() {
         {activePanel === "research" && <ResearchPanel />}
         {activePanel === "drafting" && <DraftingPanel />}
         {activePanel !== "research" && activePanel !== "drafting" && (
-          <LockedPanel panelKey={activePanel} />
+          <ComingSoonPanel panelKey={activePanel} />
         )}
       </main>
     </div>
