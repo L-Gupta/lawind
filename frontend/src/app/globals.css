@@ -1145,8 +1145,146 @@ body:has(.dashboard-layout) .site-footer {
   border-top: 1px solid var(--line);
 }
 
+.about-gallery-section {
+  padding: 5rem 2rem 0;
+  text-align: center;
+}
+
+.about-gallery {
+  height: 70vh;
+  width: 100%;
+  max-width: 1100px;
+  margin: 3rem auto 0;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.gallery-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+}
+
+.gallery-fallback-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.gallery-fallback-grid img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .about-gallery {
+    height: 50vh;
+  }
+}
+
 @media (max-width: 600px) {
   .mission-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ── Who it's for / globe section ── */
+.segments-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  background: var(--bg2);
+}
+
+.segments-left {
+  padding: 0 1rem;
+}
+
+.segments-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.segments-list h3 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+.segments-list p {
+  font-size: 14px;
+  color: var(--ink60);
+  line-height: 1.65;
+  font-family: system-ui, sans-serif;
+}
+
+.segments-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.globe-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.globe-canvas {
+  cursor: grab;
+}
+
+.globe-canvas:active {
+  cursor: grabbing;
+}
+
+.globe-hint {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink30);
+  font-family: system-ui, sans-serif;
+}
+
+.globe-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 300px;
+  border: 1px dashed var(--line);
+  color: var(--ink30);
+  font-size: 13px;
+  font-family: system-ui, sans-serif;
+}
+
+@media (max-width: 768px) {
+  .segments-section {
+    grid-template-columns: 1fr;
+    padding: 4rem 1.5rem;
+  }
+
+  .segments-right {
+    margin-top: 1rem;
   }
 }

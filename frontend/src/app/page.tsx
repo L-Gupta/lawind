@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { WaitlistForm } from "@/components/waitlist-form";
+import RotatingEarth from "@/components/ui/wireframe-dotted-globe";
 
 const platformFeatures = [
   {
@@ -104,30 +105,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        id="segments"
-        className="section"
-        style={{ background: "var(--bg2)", maxWidth: "none" }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          <p className="ey" style={{ textAlign: "center" }}>
-            Who it&apos;s for
-          </p>
-          <h2 className="section-title">
+      <section id="segments" className="segments-section">
+        <div className="segments-left">
+          <p className="ey">Who it&apos;s for</p>
+          <h2 className="section-title" style={{ textAlign: "left" }}>
             Built for every lawyer <em>in India</em>
           </h2>
-          <p className="section-sub">
+          <p className="section-sub" style={{ textAlign: "left", margin: "0 0 2.5rem" }}>
             From the Supreme Court to your first moot — LawInd is built for
             the full breadth of Indian legal practice.
           </p>
-          <div className="card-grid">
+          <ul className="segments-list">
             {segments.map((segment) => (
-              <div key={segment.title} className="segment-card">
+              <li key={segment.title}>
                 <h3>{segment.title}</h3>
                 <p>{segment.description}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+        </div>
+        <div className="segments-right">
+          <RotatingEarth width={480} height={480} />
         </div>
       </section>
 

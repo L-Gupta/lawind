@@ -1,4 +1,16 @@
 import Link from "next/link";
+import InfiniteGallery from "@/components/ui/3d-gallery-photography";
+
+const galleryImages = [
+  { src: "https://images.unsplash.com/photo-1741332966416-414d8a5b8887?w=900&auto=format&fit=crop&q=60", alt: "Law library" },
+  { src: "https://images.unsplash.com/photo-1754769440490-2eb64d715775?w=900&auto=format&fit=crop&q=60", alt: "Courthouse architecture" },
+  { src: "https://images.unsplash.com/photo-1758640920659-0bb864175983?w=900&auto=format&fit=crop&q=60", alt: "Legal documents" },
+  { src: "https://plus.unsplash.com/premium_photo-1758367454070-731d3cc11774?w=900&auto=format&fit=crop&q=60", alt: "Courtroom" },
+  { src: "https://images.unsplash.com/photo-1746023841657-e5cd7cc90d2c?w=900&auto=format&fit=crop&q=60", alt: "Legal practice" },
+  { src: "https://images.unsplash.com/photo-1741715661559-6149723ea89a?w=900&auto=format&fit=crop&q=60", alt: "Statute books" },
+  { src: "https://images.unsplash.com/photo-1725878746053-407492aa4034?w=900&auto=format&fit=crop&q=60", alt: "Legal research" },
+  { src: "https://images.unsplash.com/photo-1752588975168-d2d7965a6d64?w=900&auto=format&fit=crop&q=60", alt: "Indian judiciary" },
+];
 
 const whatWeDo = [
   {
@@ -77,6 +89,16 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="about-gallery-section">
+        <p className="ey" style={{ textAlign: "center" }}>
+          A closer look
+        </p>
+        <h2 className="section-title">
+          Depth of practice, <em>depth of research</em>
+        </h2>
+        <InfiniteGallery images={galleryImages} className="about-gallery" />
       </section>
 
       <section className="mission-section">
