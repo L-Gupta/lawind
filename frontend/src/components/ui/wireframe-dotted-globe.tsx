@@ -127,9 +127,9 @@ export default function RotatingEarth({ width = 520, height = 520, className = "
 
       context.beginPath();
       context.arc(containerWidth / 2, containerHeight / 2, currentScale, 0, 2 * Math.PI);
-      context.fillStyle = "#0a0a0a";
+      context.fillStyle = "#0a0907";
       context.fill();
-      context.strokeStyle = "rgba(255, 255, 255, 0.6)";
+      context.strokeStyle = "rgba(160, 120, 32, 0.6)";
       context.lineWidth = 1.5 * scaleFactor;
       context.stroke();
 
@@ -160,7 +160,7 @@ export default function RotatingEarth({ width = 520, height = 520, className = "
           ) {
             context.beginPath();
             context.arc(projected[0], projected[1], 1.1 * scaleFactor, 0, 2 * Math.PI);
-            context.fillStyle = "rgba(255, 255, 255, 0.9)";
+            context.fillStyle = "rgba(160, 120, 32, 0.85)";
             context.fill();
           }
         });

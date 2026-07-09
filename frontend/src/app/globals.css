@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f6f6f4;
-  --bg2: #ececea;
-  --ink: #0a0a0a;
-  --ink2: #262626;
-  --ink60: rgba(10, 10, 10, 0.6);
-  --ink30: rgba(10, 10, 10, 0.3);
-  --ink10: rgba(10, 10, 10, 0.1);
-  --ink05: rgba(10, 10, 10, 0.05);
-  --ink3: #4d4d4d;
-  --gold2: #0a0a0a;
-  --gold3: #000000;
-  --line: rgba(0, 0, 0, 0.14);
-  --linest: rgba(0, 0, 0, 0.28);
+  --bg: #faf8f4;
+  --bg2: #f2efe8;
+  --ink: #0a0907;
+  --ink2: #2c2a25;
+  --ink60: rgba(10, 9, 7, 0.6);
+  --ink30: rgba(10, 9, 7, 0.3);
+  --ink10: rgba(10, 9, 7, 0.1);
+  --ink05: rgba(10, 9, 7, 0.05);
+  --ink3: #5c5849;
+  --gold2: #a07820;
+  --gold3: #6b5210;
+  --line: rgba(139, 105, 20, 0.15);
+  --linest: rgba(139, 105, 20, 0.3);
 }
 
 @theme inline {
@@ -150,7 +150,7 @@ a {
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold2);
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(139, 105, 20, 0.3);
   padding: 0.5rem 1.4rem;
   font-family: system-ui, sans-serif;
   margin-bottom: 2rem;
@@ -298,7 +298,7 @@ a {
 
 .contact-section h2 em {
   font-style: italic;
-  color: #fff;
+  color: var(--gold2);
 }
 
 .contact-section p {
@@ -337,7 +337,6 @@ a {
   height: 100%;
   object-fit: contain;
   object-position: center;
-  filter: grayscale(1);
 }
 
 .home-hero h1 {
@@ -552,7 +551,7 @@ a {
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--gold2);
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(139, 105, 20, 0.3);
   padding: 0.35rem 0.9rem;
   font-family: system-ui, sans-serif;
 }
@@ -708,7 +707,7 @@ a {
 }
 
 .waitlist-fields input:focus {
-  border-color: #fff;
+  border-color: var(--gold2);
 }
 
 .waitlist-fields input::placeholder {
@@ -727,7 +726,7 @@ a {
 
 .waitlist-success {
   font-size: 15px;
-  color: #fff;
+  color: var(--gold2);
   font-family: system-ui, sans-serif;
 }
 
@@ -792,8 +791,8 @@ body:has(.dashboard-layout) .site-footer {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--gold2);
+  border: 1px solid rgba(160, 120, 32, 0.4);
   padding: 0.25rem 0.7rem;
   font-family: system-ui, sans-serif;
 }
@@ -829,7 +828,7 @@ body:has(.dashboard-layout) .site-footer {
 }
 
 .sidebar-nav-item.active {
-  border-left-color: #fff;
+  border-left-color: var(--gold2);
   background: rgba(255, 255, 255, 0.06);
   color: #fff;
 }
@@ -869,7 +868,7 @@ body:has(.dashboard-layout) .site-footer {
 }
 
 .sidebar-signout:hover {
-  border-color: #fff;
+  border-color: var(--gold2);
   color: #fff;
 }
 
@@ -1112,7 +1111,7 @@ body:has(.dashboard-layout) .site-footer {
 
 .mission-section h2 em {
   font-style: italic;
-  color: #fff;
+  color: var(--gold2);
 }
 
 .mission-grid {
@@ -1128,7 +1127,7 @@ body:has(.dashboard-layout) .site-footer {
   font-size: 10px;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--gold2);
   font-family: system-ui, sans-serif;
   margin-bottom: 0.5rem;
 }
