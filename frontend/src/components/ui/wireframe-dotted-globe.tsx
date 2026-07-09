@@ -24,6 +24,8 @@ interface LandFeatureCollection {
   features: LandFeature[];
 }
 
+const INDIA_COORDS: [number, number] = [78.9629, 20.5937];
+
 export default function RotatingEarth({ width = 520, height = 520, className = "" }: RotatingEarthProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [error, setError] = useState<string | null>(null);
@@ -162,6 +164,32 @@ export default function RotatingEarth({ width = 520, height = 520, className = "
             context.fill();
           }
         });
+
+        const viewCenter: [number, number] = [-rotation[0], -rotation[1]];
+        const indiaVisible = d3.geoDistance(INDIA_COORDS, viewCenter) < Math.PI / 2;
+        if (indiaVisible) {
+          const projectedIndia = projection(INDIA_COORDS);
+          if (projectedIndia) {
+            const [px, py] = projectedIndia;
+
+            context.beginPath();
+            context.arc(px, py, 4.5 * scaleFactor, 0, 2 * Math.PI);
+            context.strokeStyle = "#fff";
+            context.lineWidth = 1.5 * scaleFactor;
+            context.stroke();
+
+            context.beginPath();
+            context.arc(px, py, 2 * scaleFactor, 0, 2 * Math.PI);
+            context.fillStyle = "#fff";
+            context.fill();
+
+            context.fillStyle = "rgba(255, 255, 255, 0.9)";
+            context.font = `${11 * scaleFactor}px system-ui, sans-serif`;
+            context.textAlign = "left";
+            context.textBaseline = "middle";
+            context.fillText("India", px + 9 * scaleFactor, py);
+          }
+        }
       }
     };
 
@@ -185,7 +213,7 @@ export default function RotatingEarth({ width = 520, height = 520, className = "
       }
     };
 
-    const rotation = [20, -15];
+    const rotation = [-INDIA_COORDS[0], -INDIA_COORDS[1]];
     let autoRotate = true;
     const rotationSpeed = 0.3;
 
